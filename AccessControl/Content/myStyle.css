@@ -1,12 +1,78 @@
 ﻿body {
       background-color: #f0f0f0;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Jura', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       color: #313131;
       line-height: 1;
       padding: 5px;
+
   }
+
+.page-content {
+    margin:0 auto;
+    margin-top: 40pt;
+    padding: 0;
+    background-color: #fff;
+    opacity: 0.93;
+    
+}
+
+.font-system {
+    font-family: 'Jura', sans-serif;
+    font-weight: bold;
+}
+
    
-  
+.panel-gradient {
+      background: linear-gradient(15deg, rgb(52, 73, 94), rgb(223, 230, 233));
+  }
+
+#centro {
+    width:100px;
+    height:100px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-top:-50px;
+    margin-left:-50px;
+}
+
+
+.row-administrator {
+    background: rgb(1,50,67);
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    line-height: 3;
+    align-items: center;
+    text-align: justify;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 2pt;
+}
+
+
+.center-align {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+
+.filterBox {
+    border: blue;
+    border: 1px;   
+}
+
+
+.header-table {
+    background: rgb(99, 110, 114);
+    color: white;
+    font-size: 13px;
+}
+
+
+
+
+
 .form-login {
     max-width: 450px;
     max-height: 350px;
@@ -139,3 +205,18 @@
 }
    
 
+footer {
+
+    position:fixed;
+    left:0px;
+    bottom:0px;
+    height:50px;
+    width:100%;
+    background:#000;
+    color: #fff;
+
+
+}
+.footer-text {
+    margin: 0 auto;
+}

@@ -4,68 +4,129 @@
     Layout = null;
 }
 
-<!DOCTYPE html>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/myStyle.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Jura:700" rel="stylesheet">
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Password)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Active)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Profile)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
+
+<body class="panel-gradient">
+
+
+    <div class="row row-administrator">
+        <div class="col-md-9 col-md-push-3 centro">Administrator</div>
+        <div class="col-md-3 col-md-pull-9 centro">
+            @Html.ActionLink("Create New", "Create")
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="filterBox ">
+
+        <form class="form-group" id="formCheck">
+            <input type="radio" id="c1" name="chkFilter" value="2"> Email
+            <input type="radio" id="c2" name="chkFilter" value="0" checked> Name
+            <input type="radio" id="c3" name="chkFilter" value="1"> Last Name
+            <input type="radio" id="c4" name="chkFilter" value="3"> Profile
+
+        </form>
+
+        <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search here . . .">
+        
+
+    </div>
+
+    <br />
+
+<table id="myTable" class="table">
+    <thead>
+        <tr class="header-table">
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.LastName)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th>@Html.DisplayNameFor(model => model.Active)</th>
+            <th>@Html.DisplayNameFor(model => model.Profile)</th>
+
             <th></th>
         </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Active)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Profile)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-            </td>
-        </tr>
-    }
-    
-    </table>
+    </thead>
+    <tbody class="centro">
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Active)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Profile)
+                </td>
+
+                <td>
+                    <button type="button" class="btn btn-default btn-xs">@Html.ActionLink("Edit", "Edit", new {id = item.Id})</button>
+                    <button type="button" class="btn btn-default btn-xs">@Html.ActionLink("Details", "Details", new {id = item.Id})</button>
+                    <button type="button" class="btn btn-default btn-xs">@Html.ActionLink("Delete", "Delete", new {id = item.Id})</button>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
 </body>
-</html>
+
+
+
+
+
+<script>
+    function myFunction() {
+
+        // Declare variables
+        var td, i, j;
+        var input = document.getElementById("myInput");
+        var filter = input.value.toUpperCase();
+        var table = document.getElementById("myTable");
+        var tr = table.getElementsByTagName("tr");
+
+
+        var radiosFilter = document.getElementsByName('chkFilter');
+
+        var rst = -1;
+
+        for (j = 0, length = radiosFilter.length; j < length; j++) {
+            if (radiosFilter[j].checked) {
+                rst = radiosFilter[j].value;
+                break;
+            }
+        }
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++)
+        {
+            td = tr[i].getElementsByTagName("td")[ parseInt(rst)];
+            if (td)
+            {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1)
+                {
+                    tr[i].style.display = "";
+                }
+                else
+                {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+

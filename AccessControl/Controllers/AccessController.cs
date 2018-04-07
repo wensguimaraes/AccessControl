@@ -10,6 +10,7 @@ using AccessControl.Models;
 
 namespace AccessControl.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class AccessController : Controller
     {
         private DbZeusEntities db = new DbZeusEntities();

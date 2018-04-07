@@ -59,7 +59,7 @@ namespace AccessControl.Controllers
                             else
                             {
                                 //Escreve na tela a mensagem de erro informada
-                                ModelState.AddModelError("", "Senha informada Inválida!!!");
+                                ModelState.AddModelError("Password", "Invalid Password. =/");
                                 //Retorna a tela de login
                                 return View(new Access());
                             }
@@ -72,13 +72,14 @@ namespace AccessControl.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("", "E-mail informado inválido!!!");
+                        ModelState.AddModelError("Email", @"Invalid Email. ");
                         return View(new Access());
                     }
                 }
             }
             //Caso os campos não esteja de acordo com a solicitação retorna a tela de login com as mensagem dos campos
             return View(login);
-        } 
+        }
+
     }
 }
