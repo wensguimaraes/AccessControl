@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -13,28 +14,14 @@ namespace AccessControl.Controllers
     [Authorize(Roles = "Administrator")]
     public class AccessController : Controller
     {
-        private DbZeusEntities db = new DbZeusEntities();
+        private readonly DbZeusEntities _db = new DbZeusEntities();
 
         // GET: Access
         public ActionResult Index()
         {
-            return View(db.Access.ToList());
+            return View(_db.Access.ToList());
         }
-
-        // GET: Access/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Access access = db.Access.Find(id);
-            if (access == null)
-            {
-                return HttpNotFound();
-            }
-            return View(access);
-        }
+        
 
         // GET: Access/Create
         public ActionResult Create()
@@ -49,10 +36,21 @@ namespace AccessControl.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Email,Password,Active,Profile,Name,LastName")] Access access)
         {
-            if (ModelState.IsValid)
+
+            var exist = _db.Access.Any(x => x.Email == access.Email);
+
+            if (exist)
             {
-                db.Access.Add(access);
-                db.SaveChanges();
+                ModelState.AddModelError("Email", "This email has already been registered.");
+                return View(access);
+            }
+            else if (ModelState.IsValid)
+            {
+                access.Password = Access.Encrypt(access.Password);
+                _db.Access.Add(access);
+
+                _db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
@@ -63,14 +61,12 @@ namespace AccessControl.Controllers
         public ActionResult Edit(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Access access = db.Access.Find(id);
+
+            Access access = _db.Access.Find(id);
             if (access == null)
-            {
                 return HttpNotFound();
-            }
+
             return View(access);
         }
 
@@ -81,24 +77,45 @@ namespace AccessControl.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Email,Password,Active,Profile,Name,LastName")] Access access)
         {
-            if (ModelState.IsValid)
+            var exist = _db.Access.Any(x => x.Id != access.Id && x.Email == access.Email);
+
+            if (exist)
             {
-                db.Entry(access).State = EntityState.Modified;
-                db.SaveChanges();
+                ModelState.AddModelError("Email", "This email has already been registered.");
+                return View(access);
+            }
+            else if (ModelState.IsValid)
+            {
+                var acc = _db.Access.Find(access.Id);
+
+                if (!acc.ValidatePassword(access.Password))
+                {
+                    acc.Password = Access.Encrypt(access.Password);
+
+                }
+
+                acc.Name = access.Name;
+                acc.Name = access.LastName;
+                acc.Name = access.Email;
+                acc.Name = access.Profile;
+                
+                _db.Access.AddOrUpdate(acc);
+                //_db.Entry(access).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(access);
         }
 
         // GET: Access/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete([Bind(Include = "Email,Id,Password,Active,Profile,Name,LastName")] Access access)
         {
-            if (id == null)
+            if (access == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Access access = db.Access.Find(id);
-            if (access == null)
+            Access accessDb = _db.Access.Find(access.Id);
+            if (accessDb == null)
             {
                 return HttpNotFound();
             }
@@ -110,9 +127,9 @@ namespace AccessControl.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Access access = db.Access.Find(id);
-            db.Access.Remove(access);
-            db.SaveChanges();
+            Access access = _db.Access.Find(id);
+            _db.Access.Remove(access);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -120,7 +137,7 @@ namespace AccessControl.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\Wemerson\AccessControl\AccessControl\Models\ModelDbZeus.edmx'. 
+﻿// T4 code generation is enabled for model 'E:\Projects\AccessControl\AccessControl\Models\ModelDbZeus.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

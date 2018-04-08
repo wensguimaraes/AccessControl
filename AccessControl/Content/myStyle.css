@@ -16,6 +16,13 @@
     
 }
 
+.filter-Box {
+    margin-top: 15px;   
+    border: 1px solid gray;
+    padding: 10px;
+    border-radius: 10px;
+}
+
 .font-system {
     font-family: 'Jura', sans-serif;
     font-weight: bold;
@@ -23,7 +30,8 @@
 
    
 .panel-gradient {
-      background: linear-gradient(15deg, rgb(52, 73, 94), rgb(223, 230, 233));
+    background: linear-gradient(15deg, rgb(52, 73, 94), rgb(223, 230, 233));
+    
   }
 
 #centro {
@@ -37,18 +45,43 @@
 }
 
 
+.flex-centralizado {
+  display: flex;
+  justify-content: center;
+}
+
 .row-administrator {
     background: rgb(1,50,67);
     color: rgb(255, 255, 255);
     font-size: 18px;
-    line-height: 3;
+    line-height: 2;
     align-items: center;
     text-align: justify;
     margin-left: 10px;
     margin-right: 10px;
-    padding: 2pt;
+    padding: 0pt;
+    border-radius: 10px;
 }
 
+.blur {
+    background-color: black;
+}
+
+.button-add-user {
+    width: 130px;
+    text-align: center;
+    height: 25px;
+    
+    border: 1px solid #eee;
+    border-radius: 6px;
+    background-color:forestgreen;
+    color: white;
+    font-size: 12px;
+    margin-left: 200px;
+
+	
+
+}
 
 .center-align {
     position: absolute;
@@ -56,19 +89,30 @@
     left: 50%;
 }
 
-
-.filterBox {
-    border: blue;
-    border: 1px;   
+#border-radius {
+    border: 1px solid;
+    border-radius: 5px;
 }
-
+.border-radius-red {
+    border: 1px solid red;
+    border-radius: 5px;
+    
+}
 
 .header-table {
     background: rgb(99, 110, 114);
     color: white;
-    font-size: 13px;
+    font-size: 16px;
+    border-radius: 10px;
 }
 
+.body-table {
+    background: white;
+    color: black;
+    font-size: 14px;
+    border-radius: 10px;
+    
+}
 
 
 

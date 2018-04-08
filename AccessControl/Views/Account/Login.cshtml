@@ -19,35 +19,33 @@
 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
 {
     @Html.AntiForgeryToken();
-
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
+    
 
     <body class="panel-gradient">
 
-        <div class="centro">
-            <div class="form-login">
-                <div class="panel panel-default">
+    <div class="centro">
+        <div class="form-login">
+            <div class="panel panel-default">
+
+                
+
+                <div class="panel-heading">
+                    <h1 class="panel-title font-system" align="center">System Name</h1>
+                </div>
 
 
-
-                    <div class="panel-heading">
-                        <h1 class="panel-title font-system" align="center">System Name</h1>
-                    </div>
-
-
-
-                    <div style="padding-top: 50px" class="panel-body" align="center">
-
-                        <div style="margin-bottom: 30px" class="input-group mb-2" align="center">
-                            <span style="margin-right: 10px" class="input-group-addon"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAF/SURBVEhL7dU9KEVhHMfx462UiEVJGSiJ1aRkZzIoZTCZpBRZWAxSVu8Di0GMYjJYlJkBKUVSSFHyltfv7zjP7bn3Pve6uY8y+Nen7vM/T+d3z3Oec07wXz4qD2UelSCuirCIe3x4dopOhDUH1yRfXtGI4CoauCb58IwxhIN9bOI9GvtwgzXcYgaxA0fowZbV+4kHTGAUL1EvLki0IbrQir2ol6k3LKAeK1HPSAoyplCIbmjnuObYtEQKqINuQ+LxlEGyg0oocADXcM1phqoDd0icI2mDRDuyBqpSjEP34ADtMDWIdBvp26B55EBhujJVOfK/fsb6VTiB6xySNkhvi1z0QldxCLNMBRjBE7RpGlCNM7jOlTJoCRVYt3qi5dHO2rV68og+1OI86tmcQdqabbiwepnaQAsurZ4kBWniLLJ5QyhkCNpIphcG6UHTQDdT98EczIb+6DbMF2EasQfMBPpkVqYf4YP2GyHGMYoRVhMmserRMoahr+1//fkKgk+hoIxnfxcKRAAAAABJRU5ErkJggg=="></span>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div style="padding-top: 50px" class="panel-body" align="center">
+                    
+                        <div class="form-group" style="margin-bottom: 30px"  align="center">
+                            @*<span style="margin-right: 10px" class="frm-control-addon"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAF/SURBVEhL7dU9KEVhHMfx462UiEVJGSiJ1aRkZzIoZTCZpBRZWAxSVu8Di0GMYjJYlJkBKUVSSFHyltfv7zjP7bn3Pve6uY8y+Nen7vM/T+d3z3Oec07wXz4qD2UelSCuirCIe3x4dopOhDUH1yRfXtGI4CoauCb58IwxhIN9bOI9GvtwgzXcYgaxA0fowZbV+4kHTGAUL1EvLki0IbrQir2ol6k3LKAeK1HPSAoyplCIbmjnuObYtEQKqINuQ+LxlEGyg0oocADXcM1phqoDd0icI2mDRDuyBqpSjEP34ADtMDWIdBvp26B55EBhujJVOfK/fsb6VTiB6xySNkhvi1z0QldxCLNMBRjBE7RpGlCNM7jOlTJoCRVYt3qi5dHO2rV68og+1OI86tmcQdqabbiwepnaQAsurZ4kBWniLLJ5QyhkCNpIphcG6UHTQDdT98EczIb+6DbMF2EasQfMBPpkVqYf4YP2GyHGMYoRVhMmserRMoahr+1//fkKgk+hoIxnfxcKRAAAAABJRU5ErkJggg=="></span>*@
                             @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control input-lg", placeholder = "Email", autofocus = true } })
                             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger centro" })
 
                         </div>
 
-                        <div style="margin-bottom: 30px" class="input-group">
-                            <span style="margin-right: 10px" class="input-group-addon"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGmSURBVEhLxdbNK0RRHMbxkZfkNSVlobz9AWSvWChJsbEhpViJvGRppRRLG5QNZcNK2SgblFKKspBkhZJCicj796n7qzvjjnvGVZ76bJ7OuefemXvOTMwhRRjDJi7xjHucYgntSEOkdOEOnyH2UYFfpQcfSLyoniixkyuUIqWU4QF2kT20ohCWcgzhBjZuDSllEjZ5G1lIlhrYU+oTqIJzDmEL1asIySJsfL8K17xBk3SnGSpC0gtbaE6FSwpgky5UOKQFNmdFhUvycebZUeGQBticBRUu0QatjED7KRNJU4IN2EcQxSNGEJhVBE2KoglxSYd/g/6VGcRFOz5oYFTLiMu/LnSM84ROR8wRdID6+3foNPGfexK60AAUnQr+46UDSjbWoU6nSCMU7cFd2PgfF9Kxo5fDUgf1ejp/mqFev0X+6OfFrhX6RNWwdELdE4pVeBmG+mvkqvAyDbtO6EIn6MMYbr1ODqA7Hoc2pfVb6MYUXrxOnF6Gv/B/C+Ug6P9BVHpjv0XfS9DgKEbxLW14RdCE39CNa18FphYTmI9gFoPIg5dY7AtMiGrfVSK49wAAAABJRU5ErkJggg=="></span>
+                        <div class="form-group" style="margin-bottom: 30px" >
+                            @*<span style="margin-right: 10px" class="input-group-addon"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGmSURBVEhLxdbNK0RRHMbxkZfkNSVlobz9AWSvWChJsbEhpViJvGRppRRLG5QNZcNK2SgblFKKspBkhZJCicj796n7qzvjjnvGVZ76bJ7OuefemXvOTMwhRRjDJi7xjHucYgntSEOkdOEOnyH2UYFfpQcfSLyoniixkyuUIqWU4QF2kT20ohCWcgzhBjZuDSllEjZ5G1lIlhrYU+oTqIJzDmEL1asIySJsfL8K17xBk3SnGSpC0gtbaE6FSwpgky5UOKQFNmdFhUvycebZUeGQBticBRUu0QatjED7KRNJU4IN2EcQxSNGEJhVBE2KoglxSYd/g/6VGcRFOz5oYFTLiMu/LnSM84ROR8wRdID6+3foNPGfexK60AAUnQr+46UDSjbWoU6nSCMU7cFd2PgfF9Kxo5fDUgf1ejp/mqFev0X+6OfFrhX6RNWwdELdE4pVeBmG+mvkqvAyDbtO6EIn6MMYbr1ODqA7Hoc2pfVb6MYUXrxOnF6Gv/B/C+Ug6P9BVHpjv0XfS9DgKEbxLW14RdCE39CNa18FphYTmI9gFoPIg5dY7AtMiGrfVSK49wAAAABJRU5ErkJggg=="></span>*@
                             @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Password" })
                             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger centro" })
 
@@ -57,12 +55,13 @@
 
                             <div class="col-sm-12 controls">
                                 <input type="submit" value="Sign in" class="btn btn-primary btn-lg" />
+
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
+    </div>
 
     </body>
     

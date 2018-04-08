@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -13,8 +14,10 @@ namespace AccessControl.Models
     [MetadataType(typeof(PartialAccess))]
     public partial class Access
     {
-        private TripleDESCryptoServiceProvider _tripleDes;
-        private MD5CryptoServiceProvider _md5;
+        
+
+        private static TripleDESCryptoServiceProvider _tripleDes;
+        private static MD5CryptoServiceProvider _md5;
         private const string Key = "T3st3";
 
 
@@ -36,7 +39,7 @@ namespace AccessControl.Models
         /// </summary>
         /// <param name="stringToEncrypt"></param>
         /// <returns></returns>
-        private string Encrypt(string stringToEncrypt)
+        public static string Encrypt(string stringToEncrypt)
         {
             try
             {
@@ -64,6 +67,21 @@ namespace AccessControl.Models
 
         }
 
+
+        public Access Clone()
+        {
+            return new Access
+            {
+                Id = Id,
+                Name = Name,
+                LastName = LastName,
+                Profile = Profile,
+                Active = Active,
+                Email = Email,
+                Password = string.Empty
+            };
+        }
+
     }
 
     public class PartialAccess
@@ -79,13 +97,12 @@ namespace AccessControl.Models
         [Required()]
         [DataType(DataType.EmailAddress)]
         [StringLength(128)]
+        [Index(IsUnique = true)]
         public string Email { get; set; }
 
-
-
-
+        
         [Required()]
-        [StringLength(10, MinimumLength = 6)]
+        [StringLength(1000, MinimumLength = 6)]
         //[RegularExpression(@"^((?=.*[a-z])(?=.*[A-Z])(?=.*\d)).+$")]
         [DataType(DataType.Password)]
         //[MembershipPassword()]
@@ -94,19 +111,18 @@ namespace AccessControl.Models
 
 
 
-
-
+        [Required()]
         [Display(Name = "Active")]
         public bool Active { get; set; }
 
 
-
+        [Required()]
         [Display(Name = "Profile")]
         public string Profile { get; set; }
 
 
-        
-        [StringLength(30, MinimumLength = 6)]
+        [Required()]
+        [StringLength(30, MinimumLength = 2)]
         [DataType(DataType.Text)]
         [Display(Name = "Name")]
         public string Name { get; set; }
@@ -114,14 +130,20 @@ namespace AccessControl.Models
 
 
 
-        
-        [StringLength(30, MinimumLength = 6)]
+        [Required()]
+        [StringLength(30, MinimumLength = 1)]
         [DataType(DataType.Text)]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
 
 
+    }
+
+    public enum Profiles
+    {
+        User,
+        Administrator
     }
 
 }

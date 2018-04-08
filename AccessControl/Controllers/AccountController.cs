@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.WebPages;
 using AccessControl.Models;
 
 namespace AccessControl.Controllers
@@ -26,7 +27,7 @@ namespace AccessControl.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(AccessControl.Models.Access login, string returnUrl)
         {
-            if (ModelState.IsValid)
+            if (!login.Email.IsEmpty() && !login.Password.IsEmpty())
             {
                 using (AccessControl.Models.DbZeusEntities db = new AccessControl.Models.DbZeusEntities())
                 {
